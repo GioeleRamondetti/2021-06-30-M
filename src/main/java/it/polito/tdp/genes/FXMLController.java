@@ -38,12 +38,16 @@ public class FXMLController {
 
     @FXML
     void doContaArchi(ActionEvent event) {
-
+    	if(!txtSoglia.getText().equals("")) {
+    		txtResult.appendText("archi maggiori della soglia : "+model.countarchi(Double.parseDouble(txtSoglia.getText()))+" archi minori della soglia"+(model.getNarchi()-model.countarchi(Double.parseDouble(txtSoglia.getText()))));
+    	}
     }
 
     @FXML
     void doRicerca(ActionEvent event) {
-
+    	if(!txtSoglia.getText().equals("")) {
+    		txtResult.appendText("percorso : "+model.getpercorsomax(Double.parseDouble(txtSoglia.getText())).toString());
+    	}
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -57,6 +61,7 @@ public class FXMLController {
 
 	public void setModel(Model model) {
 		this.model = model ;
-		
+		model.creagrafo();
+		txtResult.setText("grafo creato con "+model.getNarchi()+" archi e "+model.getNvertici()+" vertici, arco di peso max : "+model.getMax()+" arco peso minimo : "+model.getMin());
 	}
 }
